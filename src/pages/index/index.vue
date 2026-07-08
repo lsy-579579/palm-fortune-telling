@@ -56,12 +56,19 @@ import { checkCameraPermission } from '@/utils/permission'
 
 async function goToCamera() {
   appStore.reset()
+  // #ifdef H5
+  // H5端无需权限检查，直接跳转（浏览器会自行处理摄像头权限）
+  uni.navigateTo({ url: '/pages/camera/camera' })
+  // #endif
+  // #ifndef H5
+  // 小程序/App端需要检查相机权限
   const hasPermission = await checkCameraPermission()
   if (hasPermission) {
     uni.navigateTo({ url: '/pages/camera/camera' })
   } else {
     uni.showToast({ title: '需要相机权限才能拍照', icon: 'none' })
   }
+  // #endif
 }
 </script>
 
