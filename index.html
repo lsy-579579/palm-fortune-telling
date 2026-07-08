@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>掌纹算命 🔮</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔮 掌纹算命</h1>
+            <p class="subtitle">解读掌中奥秘，预见未来运势</p>
+        </header>
+
+        <!-- 欢迎页 -->
+        <section id="welcome-screen" class="screen active">
+            <div class="card">
+                <div class="palm-icon">🖐️</div>
+                <h2>欢迎来到掌纹算命</h2>
+                <p>掌纹是命运的密码，每一条纹路都藏着你的未来。点击下方按钮，开始你的掌纹解读之旅。</p>
+                <button id="start-btn" class="btn-primary">开始算命</button>
+            </div>
+        </section>
+
+        <!-- 掌纹选择页 -->
+        <section id="palm-screen" class="screen">
+            <div class="card">
+                <h2>请选择你的生命线特征</h2>
+                <p class="hint">生命线反映你的健康与活力，观察你手掌大拇指下方的弧形纹路：</p>
+                <div class="options" id="life-line-options">
+                    <div class="option" data-line="life" data-value="long">
+                        <span class="option-icon">📏</span>
+                        <span class="option-text">长而清晰，弧度大</span>
+                    </div>
+                    <div class="option" data-line="life" data-value="medium">
+                        <span class="option-icon">✂️</span>
+                        <span class="option-text">中等长度，弧度适中</span>
+                    </div>
+                    <div class="option" data-line="life" data-value="short">
+                        <span class="option-icon">🔻</span>
+                        <span class="option-text">较短，靠近大拇指</span>
+                    </div>
+                </div>
+
+                <h2>请选择你的智慧线特征</h2>
+                <p class="hint">智慧线反映你的思维与才智，观察手掌中央横向的纹路：</p>
+                <div class="options" id="head-line-options">
+                    <div class="option" data-line="head" data-value="straight">
+                        <span class="option-icon">➡️</span>
+                        <span class="option-text">平直延伸</span>
+                    </div>
+                    <div class="option" data-line="head" data-value="curved">
+                        <span class="option-icon">🌊</span>
+                        <span class="option-text">向下弯曲</span>
+                    </div>
+                    <div class="option" data-line="head" data-value="long">
+                        <span class="option-icon">🌀</span>
+                        <span class="option-text">长而深刻</span>
+                    </div>
+                </div>
+
+                <h2>请选择你的感情线特征</h2>
+                <p class="hint">感情线反映你的情感与人际关系，观察手掌上方的横向纹路：</p>
+                <div class="options" id="heart-line-options">
+                    <div class="option" data-line="heart" data-value="long">
+                        <span class="option-icon">💕</span>
+                        <span class="option-text">长且向上翘</span>
+                    </div>
+                    <div class="option" data-line="heart" data-value="wavy">
+                        <span class="option-icon">〰️</span>
+                        <span class="option-text">波浪起伏</span>
+                    </div>
+                    <div class="option" data-line="heart" data-value="straight">
+                        <span class="option-icon">📏</span>
+                        <span class="option-text">平直清晰</span>
+                    </div>
+                </div>
+
+                <button id="read-btn" class="btn-primary" disabled>解读掌纹</button>
+            </div>
+        </section>
+
+        <!-- 结果页 -->
+        <section id="result-screen" class="screen">
+            <div class="card">
+                <div class="result-header">
+                    <span class="result-icon">📜</span>
+                    <h2>你的掌纹解读</h2>
+                </div>
+                <div id="result-content"></div>
+                <div class="fortune-score">
+                    <h3>综合运势</h3>
+                    <div class="score-bar">
+                        <div class="score-fill" id="score-fill"></div>
+                    </div>
+                    <p class="score-text" id="score-text"></p>
+                </div>
+                <button id="restart-btn" class="btn-primary">重新算命</button>
+            </div>
+        </section>
+
+        <footer>
+            <p>⚠️ 仅供娱乐参考，命运掌握在自己手中</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
