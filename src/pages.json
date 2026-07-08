@@ -3,20 +3,28 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "掌纹算命",
 				"navigationStyle": "custom"
 			}
 		},
 		{
-			"path": "pages/palm/palm",
+			"path": "pages/camera/camera",
 			"style": {
-				"navigationBarTitleText": "选择掌纹特征"
+				"navigationBarTitleText": "拍摄手掌",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/analysis/analysis",
+			"style": {
+				"navigationBarTitleText": "分析中",
+				"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/result/result",
 			"style": {
-				"navigationBarTitleText": "掌纹解读结果"
+				"navigationBarTitleText": "掌纹解读结果",
+				"enableShareAppMessage": true
 			}
 		}
 	],

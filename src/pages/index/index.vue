@@ -1,23 +1,67 @@
 <template>
   <view class="container">
-    <view class="palm-icon">🖐️</view>
-    <text class="title">掌纹算命</text>
-    <text class="subtitle">解读掌中奥秘，预见未来运势</text>
-    <view class="card">
-      <text class="card-title">欢迎来到掌纹算命</text>
-      <text class="card-desc">掌纹是命运的密码，每一条纹路都藏着你的未来。点击下方按钮，开始你的掌纹解读之旅。</text>
+    <!-- 标题区域 -->
+    <view class="header">
+      <text class="palm-icon">🖐️</text>
+      <text class="title">掌纹算命</text>
+      <text class="subtitle">拍一张手掌照片，解读你的命运密码</text>
     </view>
-    <button class="btn-primary" @tap="goToPalm">开始算命</button>
+
+    <!-- 功能介绍卡片 -->
+    <view class="intro-card">
+      <view class="intro-item">
+        <text class="intro-icon">📸</text>
+        <view class="intro-text">
+          <text class="intro-title">拍照识别</text>
+          <text class="intro-desc">拍摄手掌照片，AI自动识别掌纹</text>
+        </view>
+      </view>
+      <view class="intro-item">
+        <text class="intro-icon">🔮</text>
+        <view class="intro-text">
+          <text class="intro-title">六大主线解读</text>
+          <text class="intro-desc">生命线、智慧线、感情线等全面分析</text>
+        </view>
+      </view>
+      <view class="intro-item">
+        <text class="intro-icon">📤</text>
+        <view class="intro-text">
+          <text class="intro-title">保存与分享</text>
+          <text class="intro-desc">结果可保存为图片，分享给好友</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 拍照按钮 -->
+    <button class="btn-camera" @tap="goToCamera">
+      <text class="btn-icon">📷</text>
+      <text class="btn-text">拍摄手掌</text>
+    </button>
+
+    <!-- 底部提示 -->
+    <view class="tips">
+      <text class="tips-title">拍摄提示</text>
+      <text class="tips-item">· 请在光线充足的环境下拍摄</text>
+      <text class="tips-item">· 手掌正对摄像头，五指自然展开</text>
+      <text class="tips-item">· 确保掌纹纹路清晰可见</text>
+    </view>
+
     <text class="footer">⚠️ 仅供娱乐参考，命运掌握在自己手中</text>
   </view>
 </template>
 
 <script setup lang="ts">
-import { selectionStore } from '@/store/selection'
+import { appStore } from '@/store/app'
+import { checkCameraPermission } from '@/utils/permission'
 
-function goToPalm() {
-  selectionStore.reset()
-  uni.navigateTo({ url: '/pages/palm/palm' })
+async function goToCamera() {
+  appStore.reset()
+  const hasPermission = await checkCameraPermission()
+  if (hasPermission) {
+    uni.navigateTo({ url: '/pages/camera/camera' })
+  } else {
+    uni.showToast({ title: '需要相机权限才能拍照', icon: 'none' })
+  }
 }
 </script>
 
@@ -26,17 +70,24 @@ function goToPalm() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40rpx 30rpx;
+  padding: 60rpx 30rpx 40rpx;
   min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50rpx;
 }
 
 .palm-icon {
   font-size: 100rpx;
-  margin-bottom: 20rpx;
+  margin-bottom: 16rpx;
 }
 
 .title {
-  font-size: 52rpx;
+  font-size: 56rpx;
   font-weight: bold;
   color: #ffd700;
   text-shadow: 0 0 20rpx rgba(255, 215, 0, 0.5);
@@ -44,52 +95,101 @@ function goToPalm() {
 }
 
 .subtitle {
-  font-size: 28rpx;
+  font-size: 26rpx;
   color: #b8a0d0;
+}
+
+.intro-card {
+  width: 100%;
+  background: rgba(45, 27, 78, 0.6);
+  border: 1rpx solid rgba(255, 215, 0, 0.15);
+  border-radius: 20rpx;
+  padding: 30rpx 28rpx;
   margin-bottom: 50rpx;
 }
 
-.card {
-  width: 100%;
-  background: rgba(45, 27, 78, 0.6);
-  border: 1rpx solid rgba(255, 215, 0, 0.2);
-  border-radius: 24rpx;
-  padding: 40rpx 30rpx;
-  margin-bottom: 40rpx;
+.intro-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28rpx;
+}
+
+.intro-item:last-child {
+  margin-bottom: 0;
+}
+
+.intro-icon {
+  font-size: 44rpx;
+  margin-right: 20rpx;
+}
+
+.intro-text {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
-.card-title {
-  font-size: 36rpx;
+.intro-title {
+  font-size: 30rpx;
   color: #ffd700;
   font-weight: bold;
-  margin-bottom: 20rpx;
+  margin-bottom: 4rpx;
 }
 
-.card-desc {
-  font-size: 28rpx;
-  color: #d0c0e0;
-  line-height: 1.7;
-  text-align: center;
+.intro-desc {
+  font-size: 24rpx;
+  color: #a090c0;
 }
 
-.btn-primary {
+.btn-camera {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 90rpx;
-  line-height: 90rpx;
+  height: 100rpx;
   background: linear-gradient(135deg, #ffd700, #ff8c00);
   color: #1a0a2e;
-  font-size: 32rpx;
-  font-weight: bold;
   border: none;
-  border-radius: 16rpx;
+  border-radius: 50rpx;
   margin-bottom: 40rpx;
+  box-shadow: 0 8rpx 24rpx rgba(255, 215, 0, 0.3);
+}
+
+.btn-icon {
+  font-size: 40rpx;
+  margin-right: 12rpx;
+}
+
+.btn-text {
+  font-size: 34rpx;
+  font-weight: bold;
+}
+
+.tips {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16rpx;
+  padding: 24rpx 28rpx;
+  margin-bottom: 30rpx;
+}
+
+.tips-title {
+  display: block;
+  font-size: 26rpx;
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.tips-item {
+  display: block;
+  font-size: 24rpx;
+  color: #a090c0;
+  line-height: 1.8;
 }
 
 .footer {
-  font-size: 24rpx;
+  font-size: 22rpx;
   color: #8060a0;
   text-align: center;
 }
